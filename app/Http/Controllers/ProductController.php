@@ -122,6 +122,14 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Produit mis à jour avec succès !');
     }
+    public function showProduct($name)
+    {
+        // Rechercher le produit par son nom dans la base de données
+        $product = Product::where('name', $name)->firstOrFail();
+
+        // Retourner la vue avec le produit trouvé
+        return view('products.show', compact('product'));
+    }
 
     /**
      * Supprime un produit de la base de données.
